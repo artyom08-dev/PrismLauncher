@@ -62,3 +62,7 @@ flatbuild
 
 # Snap
 *.snap
+
+# makepkg
+/src/
+/pkg/
