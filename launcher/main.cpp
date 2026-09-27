@@ -48,28 +48,34 @@ int main(int argc, char* argv[])
     console::WindowsConsoleGuard _consoleGuard;
 #endif
 
+    // Resources live in the static Launcher_logic library. Init them from the
+    // executable *before* Application so ThemeManager can see :/icons/* when
+    // it loads built-in icon themes (otherwise the linker drops unused rcc
+    // objects, and fluent_dark never shows up in Settings).
+    Q_INIT_RESOURCE(multimc);
+    Q_INIT_RESOURCE(backgrounds);
+    Q_INIT_RESOURCE(documents);
+    Q_INIT_RESOURCE(prismlauncher);
+
+    Q_INIT_RESOURCE(pe_dark);
+    Q_INIT_RESOURCE(pe_light);
+    Q_INIT_RESOURCE(pe_blue);
+    Q_INIT_RESOURCE(pe_colored);
+    Q_INIT_RESOURCE(breeze_dark);
+    Q_INIT_RESOURCE(breeze_light);
+    Q_INIT_RESOURCE(OSX);
+    Q_INIT_RESOURCE(iOS);
+    Q_INIT_RESOURCE(flat);
+    Q_INIT_RESOURCE(flat_white);
+    Q_INIT_RESOURCE(fluent_dark);
+
+    Q_INIT_RESOURCE(shaders);
+
     // initialize Qt
     Application app(argc, argv);
     switch (app.status()) {
         case Application::StartingUp:
         case Application::Initialized: {
-            Q_INIT_RESOURCE(multimc);
-            Q_INIT_RESOURCE(backgrounds);
-            Q_INIT_RESOURCE(documents);
-            Q_INIT_RESOURCE(prismlauncher);
-
-            Q_INIT_RESOURCE(pe_dark);
-            Q_INIT_RESOURCE(pe_light);
-            Q_INIT_RESOURCE(pe_blue);
-            Q_INIT_RESOURCE(pe_colored);
-            Q_INIT_RESOURCE(breeze_dark);
-            Q_INIT_RESOURCE(breeze_light);
-            Q_INIT_RESOURCE(OSX);
-            Q_INIT_RESOURCE(iOS);
-            Q_INIT_RESOURCE(flat);
-            Q_INIT_RESOURCE(flat_white);
-
-            Q_INIT_RESOURCE(shaders);
             return app.exec();
         }
         case Application::Failed:
