@@ -47,7 +47,8 @@ void EnsureOfflineLibraries::executeTask()
         emit logLine("  " + jar, MessageLevel::Error);
     }
     emit logLine(tr("\nThis instance cannot be launched because some libraries are missing or have not been downloaded yet. Please "
-                    "try again in online mode with a working Internet connection"),
+                    "download them while connected to the Internet (e.g. with the \"Download All\" button on the Version page of the "
+                    "instance), then try again"),
                  MessageLevel::Fatal);
     emitFailed("Required libraries are missing");
 }
